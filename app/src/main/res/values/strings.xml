@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Task Manager</string>
+    <string name="loginTitle">Task Manager</string>
+    <string name="email">Email</string>
+    <string name="password">Digite a senha</string>
+    <string name="submit">Login</string>
+    <string name="forgotPassword">Esqueci minha senha</string>
+    <string name="register">Criar nova conta</string>
+    <string name="forgotPasswordTitle">Esqueci a senha</string>
+    <string name="submitForgotPassword">Recuperar senha</string>
+    <string name="registerTitle">Registrar</string>
+    <string name="confirmPassword">Confirme a senha</string>
+    <string name="submitRegister">Criar conta</string>
+</resources>
