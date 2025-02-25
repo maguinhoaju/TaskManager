@@ -7,4 +7,97 @@
     android:layout_height="match_parent"
     tools:context=".TaskActivity">
 
+    <LinearLayout
+        android:id="@+id/body_tittle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <EditText
+            android:id="@+id/tittleInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:hint="Título"/>
+        <EditText
+            android:id="@+id/descriptionInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:hint="Descrição"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/date_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16sp"
+        app:layout_constraintEnd_toTopOf="@id/body_tittle"
+        app:layout_constraintStart_toStartOf="@id/body_tittle"
+        app:layout_constraintTop_toBottomOf="@id/body_tittle">
+        <EditText
+            android:id="@+id/date_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:padding="16dp"
+            android:hint="Data"/>
+        <ImageView
+            android:id="@+id/date_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/date_24"
+            android:layout_gravity="right"
+            android:padding="16dp"
+            android:layout_marginTop="-55dp"
+            android:layout_marginRight="-8dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/time_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16sp"
+        app:layout_constraintEnd_toTopOf="@id/date_picker"
+        app:layout_constraintStart_toStartOf="@id/date_picker"
+        app:layout_constraintTop_toBottomOf="@id/date_picker">
+        <EditText
+            android:id="@+id/time_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:padding="16dp"
+            android:hint="Hora"/>
+        <ImageView
+            android:id="@+id/time_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/time_24"
+            android:layout_gravity="right"
+            android:padding="16dp"
+            android:layout_marginTop="-55dp"
+            android:layout_marginRight="-8dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/save_button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="32sp"
+        app:layout_constraintEnd_toTopOf="@id/time_picker"
+        app:layout_constraintStart_toStartOf="@id/time_picker"
+        app:layout_constraintTop_toBottomOf="@id/time_picker">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save"/>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

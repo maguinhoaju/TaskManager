@@ -11,4 +11,7 @@
     <string name="registerTitle">Registrar</string>
     <string name="confirmPassword">Confirme a senha</string>
     <string name="submitRegister">Criar conta</string>
+    <string name="home">Início</string>
+    <string name="save">Salvar</string>
+    <string name="profile">Perfil</string>
 </resources>
