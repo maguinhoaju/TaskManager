@@ -3,6 +3,7 @@ package br.com.carlosmagno.taskmanager
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.com.carlosmagno.taskmanager.utils.Navigation
 
@@ -16,6 +17,7 @@ class LoginActivity : AppCompatActivity() {
         val registerLink = findViewById<TextView>(R.id.registerLink)
 
         btnLogin.setOnClickListener {
+            Toast.makeText(this, "Bem vindo!", Toast.LENGTH_LONG).show()
             Navigation.goToScreen(this, MainActivity::class.java)
         }
 

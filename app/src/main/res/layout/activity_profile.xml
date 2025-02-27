@@ -79,6 +79,46 @@
             android:layout_marginTop="-55dp"
             />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16sp"
+            android:layout_marginTop="32sp">
+            <EditText
+                android:id="@+id/email_input"
+                android:hint="@string/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext"
+                android:padding="12dp"
+                android:layout_margin="8dp"/>
+            <EditText
+                android:id="@+id/username_input"
+                android:hint="@string/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext"
+                android:padding="12dp"
+                android:layout_margin="8dp"/>
+            <EditText
+                android:id="@+id/nome_input"
+                android:hint="@string/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext"
+                android:padding="12dp"
+                android:layout_margin="8dp"/>
+        </LinearLayout>
+
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                android:padding="12dp"
+                android:layout_marginVertical="8dp"
+                android:layout_marginHorizontal="32dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
