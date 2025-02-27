@@ -55,6 +55,12 @@ class MainActivity : AppCompatActivity() {
 
         listView.setOnItemLongClickListener { parent, view, position, id ->
             val task = fakeData[position]
+            Toast.makeText(this, "Tarefa ${task.id} deletada!", Toast.LENGTH_SHORT).show()
+            true
+        }
+
+        listView.setOnItemLongClickListener { parent, view, position, id ->
+            val task = fakeData[position]
             Toast.makeText(this, "Tarefa ${task.id} long deleted", Toast.LENGTH_SHORT).show()
             true
         }
