@@ -9,10 +9,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.com.carlosmagno.taskmanager.utils.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 data class Task(val id: Int, val title: String, val subtitle: String)
 
 class MainActivity : AppCompatActivity() {
+    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance();
+    private val firebaseUser: FirebaseUser? = firebaseAuth.currentUser
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -76,12 +81,12 @@ class MainActivity : AppCompatActivity() {
             Navigation.goToScreen(this, ProfileActivity::class.java)
         }
 
-        verifySession()
+        verifySession(firebaseUser)
     }
 
-    private fun verifySession() {
-//        val activity = Intent(this, LoginActivity::class.java);
-//        startActivity(activity)
-//        finish();
+    private fun verifySession(firebaseUser: Any?) {
+        if(firebaseUser == null) {
+            Navigation.goToScreen(this, LoginActivity::class.java)
+        }
     }
 }

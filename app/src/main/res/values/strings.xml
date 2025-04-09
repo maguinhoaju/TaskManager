@@ -19,4 +19,10 @@
     <string name="tittleInput">Título</string>
     <string name="description">Descrição</string>
     <string name="task">Tarefa</string>
+    <string name="password_empty">Password cleaned</string>
+    <string name="password_very_weak">Password very weak</string>
+    <string name="password_weak">Password weak</string>
+    <string name="password_normal">Normal password</string>
+    <string name="password_strong">Password strong</string>
+    <string name="password_very_strong">Password very strong</string>
 </resources>
