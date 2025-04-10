@@ -28,10 +28,12 @@ class RegisterActivity : AppCompatActivity() {
 
         btnSubmitRegister.setOnClickListener {
             val email = findViewById<TextView>(R.id.emailInput).text.toString()
-            CoroutineScope(Dispatchers.IO).launch {
-                val passText = password.passwordInput.text.toString()
-                val confirmPasswordText = confirmPassword.text.toString()
-                register(email, passText, confirmPasswordText)
+            val passwordText = password.passwordInput.text.toString()
+            val confirmPasswordText = confirmPassword.text.toString()
+            if (isValidPasswords(passwordText, confirmPasswordText)) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    register(email, passwordText, confirmPasswordText)
+                }
             }
         }
 
@@ -40,37 +42,42 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun register(email: String, password: String, confirmPassword: String) {
+    private fun isValidPasswords(password: String, confirmPassword: String): Boolean {
         if (password != confirmPassword){
             Toast.makeText(
                 baseContext,
                 "As senhas não são iguais!",
                 Toast.LENGTH_SHORT,
             ).show()
-        }else if (password == "" || confirmPassword == ""){
+            return false
+        } else if (password.isEmpty() && confirmPassword.isNotEmpty()){
             Toast.makeText(
                 baseContext,
                 "As senhas não podem ser vazias!",
                 Toast.LENGTH_SHORT,
             ).show()
+            return false
         } else {
-            firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(
-                            baseContext,
-                            "Usuário registrado com sucesso!",
-                            Toast.LENGTH_SHORT,
-                        ).show()
-                        Navigation.goToScreen(this, MainActivity::class.java)
-                    } else {
-                        Toast.makeText(
-                            baseContext,
-                            "Falha ao registrar usuário. (${task.exception?.message})",
-                            Toast.LENGTH_SHORT,
-                        ).show()
-                    }
-                }
+            return true
         }
+    }
+    private fun register(email: String, password: String, confirmPassword: String) {
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(
+                        baseContext,
+                        "Usuário registrado com sucesso!",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                    Navigation.goToScreen(this, MainActivity::class.java)
+                } else {
+                    Toast.makeText(
+                        baseContext,
+                        "Falha ao registrar usuário. (${task.exception?.message})",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
+            }
     }
 }

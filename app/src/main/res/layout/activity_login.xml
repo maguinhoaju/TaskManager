@@ -19,7 +19,9 @@
         android:textSize="40sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingVertical="40sp"
+        />
 
     <EditText
         android:id="@+id/emailInput"
@@ -43,7 +45,9 @@
         android:hint="@string/password"
         android:background="@drawable/rounded_edittext"
         android:padding="12dp"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp"
+        android:inputType="textPassword"
+        />
 
     <TextView
         android:id="@+id/forgotPasswordLink"

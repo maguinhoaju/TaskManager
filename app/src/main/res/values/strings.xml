@@ -19,10 +19,30 @@
     <string name="tittleInput">Título</string>
     <string name="description">Descrição</string>
     <string name="task">Tarefa</string>
-    <string name="password_empty">Password cleaned</string>
-    <string name="password_very_weak">Password very weak</string>
-    <string name="password_weak">Password weak</string>
-    <string name="password_normal">Normal password</string>
-    <string name="password_strong">Password strong</string>
-    <string name="password_very_strong">Password very strong</string>
+    <string name="password_empty">Senha limpa</string>
+    <string name="password_very_weak">Senha muito fraca</string>
+    <string name="password_weak">Senha fraca</string>
+    <string name="password_normal">Senha normal</string>
+    <string name="password_strong">Senha forte</string>
+    <string name="password_very_strong">Senha muito forte</string>
+
+    <string name="loading_informations">Carregrando informações...</string>
+    <string name="error_loading_tasks">Erro ao carregar as tarefas.</string>
+    <string name="title_delete_task">Excluir tarefa?</string>
+    <string name="message_delete_task">Confirma a exclusão da tarefa?</string>
+    <string name="confirm">Confirmar</string>
+    <string name="task_deleted">Tarefa excluída</string>
+    <string name="cancel">Cancelar</string>
+    <string name="error_loading_task">Erro ao carregar a tarefa</string>
+    <string name="task_edited">Tarefa atualizada</string>
+    <string name="error_task_edited">Erro ao atualizar a tarefa.</string>
+    <string name="task_saved">Tarefa salva</string>
+    <string name="permission_granted">Permissão concedida</string>
+    <string name="permission_refused">Permissão negada</string>
+    <string name="error_to_capture_image">Erro ao capturar a imagem</string>
+    <string name="phone">Telefone</string>
+    <string name="profile_updated">Perfil atualizado</string>
+    <string name="or">ou</string>
+    <string name="submit_login_with_google_btn">Logar com </string>
+    <string name="default_web_client_id">194632531933-g10oemm56ppk2d6rvu6jr3c5b0210dvu.apps.googleusercontent.com</string>
 </resources>

@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import br.com.carlosmagno.taskmanager.utils.AuthUtils
 import br.com.carlosmagno.taskmanager.utils.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         logoutBtn.setOnClickListener {
-            Navigation.goToScreen(this, LoginActivity::class.java)
+            AuthUtils.logout(this);
         }
 
         profileBtn.setOnClickListener {

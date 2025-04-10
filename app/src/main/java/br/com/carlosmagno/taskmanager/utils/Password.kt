@@ -9,7 +9,6 @@ class Password {
         val regexLetterLowerAndUpperAndNumber = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$")
         val regexLetterLowerAndUpperAndNumberAndSpecial = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#\$%^&*(),.?\":{}|<>]).+$")
 
-
         fun verifyPasswordDifficult(text: String): Int {
             if(text.isEmpty()) {
                 return 0

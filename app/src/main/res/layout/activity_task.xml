@@ -31,6 +31,13 @@
                 android:src="@drawable/profile_24"
                 android:layout_gravity="right"
                 android:padding="16dp"/>
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow_back_24"
+                android:layout_gravity="left"
+                android:layout_marginStart="32dp"/>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -45,7 +52,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <EditText
-            android:id="@+id/tittle_input"
+            android:id="@+id/title_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/tittleInput"
