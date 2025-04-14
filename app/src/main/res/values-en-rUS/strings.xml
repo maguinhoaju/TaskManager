@@ -26,7 +26,7 @@
     <string name="password_strong">Password strong</string>
     <string name="password_very_strong">Password very strong</string>
 
-    <string name="loading_informations">Loading informations...</string>
+    <string name="loading_informations">Loading informations…</string>
     <string name="error_loading_tasks">Error to load tasks.</string>
     <string name="title_delete_task">Delete task?</string>
     <string name="message_delete_task">Are you sure you want to delete this task?</string>

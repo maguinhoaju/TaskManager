@@ -1,17 +1,28 @@
 package br.com.carlosmagno.taskmanager
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import br.com.carlosmagno.taskmanager.fragments.EmailInputFragment
+import br.com.carlosmagno.taskmanager.fragments.TaskListFragment
 import br.com.carlosmagno.taskmanager.utils.AuthUtils
 import br.com.carlosmagno.taskmanager.utils.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 data class Task(val id: Int, val title: String, val subtitle: String)
 
@@ -19,57 +30,24 @@ class MainActivity : AppCompatActivity() {
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance();
     private val firebaseUser: FirebaseUser? = firebaseAuth.currentUser
 
+    val listItems = ArrayList<String>();
+    val db_ref = FirebaseDatabase.getInstance().getReference("users/${firebaseUser?.uid}/tasks")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //supportFragmentManager.beginTransaction().replace(R.id.fragment_weather, WeatherFragment()).commit()
+
         val fabAddTask = findViewById<FloatingActionButton>(R.id.fab_add_task)
         val logoutBtn = findViewById<ImageView>(R.id.logout)
         val profileBtn = findViewById<ImageView>(R.id.profile)
-        val listView = findViewById<ListView>(R.id.tasks_list_view)
-        val fakeData = listOf(
-            Task(1, "Tarefa 1", "Descrição 1"),
-            Task(2, "Tarefa 2", "Descrição 2"),
-            Task(3, "Tarefa 3", "Descrição 3"),
-            Task(4, "Tarefa 4", "Descrição 4"),
-            Task(5, "Tarefa 5", "Descrição 5"),
-            Task(6, "Tarefa 6", "Descrição 6"),
-            Task(7, "Tarefa 7", "Descrição 7"),
-            Task(8, "Tarefa 8", "Descrição 8"),
-            Task(9, "Tarefa 9", "Descrição 9"),
-            Task(10, "Tarefa 10", "Descrição 10"),
-            Task(11, "Tarefa 11", "Descrição 11"),
-            Task(12, "Tarefa 12", "Descrição 12"),
-            Task(13, "Tarefa 13", "Descrição 13"),
-            Task(14, "Tarefa 14", "Descrição 14"),
-            Task(15, "Tarefa 15", "Descrição 15"),
-            Task(16, "Tarefa 16", "Descrição 16"),
-            Task(17, "Tarefa 17", "Descrição 17"),
-            Task(18, "Tarefa 18", "Descrição 18"),
-            Task(19, "Tarefa 19", "Descrição 19"),
-            Task(20, "Tarefa 20", "Descrição 20"),
-        )
-        val extractTitles = fakeData.map { it.title }
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, extractTitles)
-        listView.adapter = adapter
+        val listView = supportFragmentManager.findFragmentById(R.id.tasks_list_view) as TaskListFragment
 
-        listView.setOnItemClickListener { _, _, position, _ ->
-            val task = fakeData[position]
-            Toast.makeText(this, "Tarefa ${task.id} selecionada", Toast.LENGTH_LONG).show()
-            Navigation.goToScreen(this, TaskActivity::class.java)
-        }
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems)
+        val taskListView = listView.taskListView
+        taskListView.adapter = adapter
 
-        listView.setOnItemLongClickListener { parent, view, position, id ->
-            val task = fakeData[position]
-            Toast.makeText(this, "Tarefa ${task.id} deletada!", Toast.LENGTH_SHORT).show()
-            true
-        }
-
-        listView.setOnItemLongClickListener { parent, view, position, id ->
-            val task = fakeData[position]
-            Toast.makeText(this, "Tarefa ${task.id} long deleted", Toast.LENGTH_SHORT).show()
-            true
-        }
         fabAddTask.setOnClickListener {
             Navigation.goToScreen(this, TaskActivity::class.java)
         }
@@ -83,6 +61,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         verifySession(firebaseUser)
+        loadData(adapter, listView.taskListView)
+        requestNotificationPermission()
+    }
+
+    private fun requestNotificationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 0)
+        }
     }
 
     private fun verifySession(firebaseUser: Any?) {
@@ -90,4 +76,52 @@ class MainActivity : AppCompatActivity() {
             Navigation.goToScreen(this, LoginActivity::class.java)
         }
     }
+
+    private fun loadData(adapter: ArrayAdapter<String>, listView: ListView) {
+        db_ref.addValueEventListener(object: ValueEventListener {
+            val ctx = this@MainActivity
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                listItems.clear()
+
+                for(element in snapshot.children) {
+                    listItems.add(element.child("title").value.toString());
+                }
+                adapter.notifyDataSetChanged()
+
+                listView.setOnItemLongClickListener { parent, view, position, id ->
+                    val taskId = snapshot.children.toList()[position].key
+                    if (taskId != null) {
+                        AlertDialog.Builder(ctx)
+                            .setTitle(R.string.title_delete_task)
+                            .setMessage(R.string.message_delete_task)
+                            .setPositiveButton(R.string.confirm) { dialog, which ->
+                                db_ref.child(taskId).removeValue();
+                                dialog.dismiss()
+                                Toast.makeText(ctx, R.string.task_deleted, Toast.LENGTH_SHORT).show()
+                            }
+                            .setNegativeButton(R.string.cancel) { dialog, which ->
+                                dialog.dismiss()
+                            }
+                            .show()
+                    };
+                    true
+                }
+
+                listView.setOnItemClickListener { _, _, position, _ ->
+                    val taskId = snapshot.children.toList()[position].key
+
+                    val activity = Intent(ctx, TaskActivity::class.java)
+                    activity.putExtra("taskId", taskId)
+
+                    Navigation.goToScreen(ctx, activity)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(ctx, R.string.error_loading_tasks, Toast.LENGTH_SHORT).show()
+            }
+        });
+    }
+
 }

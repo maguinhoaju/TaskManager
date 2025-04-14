@@ -1,10 +1,12 @@
 package br.com.carlosmagno.taskmanager
 
 import android.os.Bundle
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import br.com.carlosmagno.taskmanager.fragments.ButtonFragment
+import br.com.carlosmagno.taskmanager.fragments.EmailInputFragment
+import br.com.carlosmagno.taskmanager.fragments.PasswordInputFragment
 import br.com.carlosmagno.taskmanager.utils.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
@@ -18,16 +20,24 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val btnLogin = findViewById<Button>(R.id.btnSubmitLogin)
+        val btnLoginFragment = supportFragmentManager.findFragmentById(R.id.btnSubmitLogin) as ButtonFragment
         val forgotPasswordLink = findViewById<TextView>(R.id.forgotPasswordLink)
         val registerLink = findViewById<TextView>(R.id.registerLink)
+        val email = supportFragmentManager.findFragmentById(R.id.emailInput) as EmailInputFragment
+        val password = supportFragmentManager.findFragmentById(R.id.passwordInput) as PasswordInputFragment
 
+        val btnLogin = btnLoginFragment.btnSubmitLogin
         btnLogin.setOnClickListener {
-            val email = findViewById<TextView>(R.id.emailInput).text.toString()
-            val password = findViewById<TextView>(R.id.passwordInput).text.toString()
+            val emailText = email.emailEditText.text.toString()
+            val passwordText = password.passwordEditText.text.toString().trim()
 
-            CoroutineScope(Dispatchers.IO).launch {
-                login(email, password)
+            val emailValido = email.validateEmail()
+            if (!emailValido || passwordText.isNullOrEmpty()) {
+                Toast.makeText(this, "Email ou senha inválidos", Toast.LENGTH_SHORT).show()
+            } else {
+                CoroutineScope(Dispatchers.IO).launch {
+                    login(emailText, passwordText)
+                }
             }
         }
 

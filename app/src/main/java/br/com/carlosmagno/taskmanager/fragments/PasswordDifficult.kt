@@ -12,7 +12,7 @@ import android.widget.TextView
 import br.com.carlosmagno.taskmanager.R
 import br.com.carlosmagno.taskmanager.utils.Password
 
-class PasswordDifficult : Fragment() {
+open class PasswordDifficult : Fragment() {
     lateinit var textViewDifficult: TextView;
     lateinit var passwordInput: EditText;
     lateinit var text: Editable;

@@ -5,21 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".fragments.PasswordDifficult">
+    tools:context=".fragments.EmailInputFragment">
 
     <EditText
-        android:id="@+id/passwordInput"
+        android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/password"
-        android:inputType="textPassword"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
         android:background="@drawable/rounded_edittext"
         android:padding="12dp"
         />
     <TextView
-        android:id="@+id/textViewDifficult"
+        android:id="@+id/emailTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="6dp"
         />
+
 </LinearLayout>

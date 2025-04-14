@@ -43,11 +43,12 @@
             android:layout_width="match_parent"
             android:layout_height="200sp"
             android:background="@color/light_gray"/>
-        <ListView
+        <fragment
             android:id="@+id/tasks_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
+            android:name="br.com.carlosmagno.taskmanager.fragments.TaskListFragment"
             android:layout_below="@id/fragment_weather"/>
     </RelativeLayout>
 

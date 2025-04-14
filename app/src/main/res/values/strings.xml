@@ -45,4 +45,8 @@
     <string name="or">ou</string>
     <string name="submit_login_with_google_btn">Logar com </string>
     <string name="default_web_client_id">194632531933-g10oemm56ppk2d6rvu6jr3c5b0210dvu.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="requiredEmail">O campo de e-mail é obrigatório.</string>
+    <string name="invalidEmail">E-mail inválido.</string>
 </resources>
