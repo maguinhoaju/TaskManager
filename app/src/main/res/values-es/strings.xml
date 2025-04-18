@@ -87,4 +87,9 @@
     <string name="profile_updated">Profile Updated!</string>
     <string name="or">O</string>
     <string name="submit_login_with_google_btn">Iniciar sesión con </string>
+    <string name="pendding_profile">Os campos em branco estão pendentes de atualização</string>
+    <string name="image_updated">Imagem salva no perfil</string>
+    <string name="imagem_update_error">Falha ao salvar a imagem do perfil</string>
+    <string name="image_loaded">Imagem carregada.</string>
+    <string name="error_loading_image">Erro ao carregar imagem</string>
 </resources>

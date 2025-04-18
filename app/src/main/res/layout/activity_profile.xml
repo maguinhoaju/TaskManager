@@ -92,6 +92,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_edittext"
                 android:padding="12dp"
+                android:editable="false"
+                android:focusable="false"
+                android:cursorVisible="false"
                 android:layout_margin="8dp"/>
             <EditText
                 android:id="@+id/username_input"
@@ -102,10 +105,18 @@
                 android:padding="12dp"
                 android:layout_margin="8dp"/>
             <EditText
-                android:id="@+id/nome_input"
+                android:id="@+id/name_input"
                 android:hint="@string/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext"
+                android:padding="12dp"
+                android:layout_margin="8dp"/>
+            <EditText
+                android:id="@+id/phone_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone"
                 android:background="@drawable/rounded_edittext"
                 android:padding="12dp"
                 android:layout_margin="8dp"/>
