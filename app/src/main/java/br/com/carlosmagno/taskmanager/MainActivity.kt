@@ -14,7 +14,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import br.com.carlosmagno.taskmanager.fragments.EmailInputFragment
 import br.com.carlosmagno.taskmanager.fragments.TaskListFragment
+import br.com.carlosmagno.taskmanager.fragments.WeatherFragment
 import br.com.carlosmagno.taskmanager.utils.AuthUtils
+import br.com.carlosmagno.taskmanager.utils.ErrorHandle
 import br.com.carlosmagno.taskmanager.utils.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
@@ -37,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //supportFragmentManager.beginTransaction().replace(R.id.fragment_weather, WeatherFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_weather, WeatherFragment()).commit()
 
         val fabAddTask = findViewById<FloatingActionButton>(R.id.fab_add_task)
         val logoutBtn = findViewById<ImageView>(R.id.logout)
@@ -49,6 +51,13 @@ class MainActivity : AppCompatActivity() {
         taskListView.adapter = adapter
 
         fabAddTask.setOnClickListener {
+            //teste para o crashlytics
+//            try {
+//                throw Exception("Test Crash")
+//            } catch (e: Exception) {
+//                Toast.makeText(this, e.message.toString(), Toast.LENGTH_SHORT).show()
+//                ErrorHandle.handleException("MainActivity", e.message.toString())
+//            }
             Navigation.goToScreen(this, TaskActivity::class.java)
         }
 

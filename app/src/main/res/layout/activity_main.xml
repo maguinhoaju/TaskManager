@@ -38,11 +38,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="60sp">
-        <View
+        <FrameLayout
             android:id="@+id/fragment_weather"
             android:layout_width="match_parent"
-            android:layout_height="200sp"
-            android:background="@color/light_gray"/>
+            android:layout_height="wrap_content"
+            />
         <fragment
             android:id="@+id/tasks_list_view"
             android:layout_width="match_parent"
